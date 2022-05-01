@@ -1,0 +1,53 @@
+create table csmc_209_fp.dbo.users (
+	user_id varchar(40) PRIMARY KEY,
+	role_id varchar(10) not null,
+	user_name varchar(50) unique not null,
+	password varchar(50),
+	FOREIGN KEY (role_id) REFERENCES roles(role_id)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+create table csmc_209_fp.dbo.roles (
+	role_id varchar(10) PRIMARY KEY,
+	role_name varchar(10) not null,
+	view_all char(1) not null,
+	edit_all char(1) not null,
+	insert_all char(1) not null,
+	delete_all char(1) not null,
+	view_group varchar(255),
+	edit_group varchar(255),
+	insert_group varchar(255),
+	delete_group varchar(255)
+)
+
+
+create table csmc_209_fp.dbo.user_logs (
+	log_id int IDENTITY(1,1) PRIMARY KEY,
+	user_id varchar(40),
+	status varchar(1),
+	log_in_time datetime,
+	log_out_time datetime,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+create table csmc_209_fp.dbo.groups (
+	group_id int IDENTITY(1,1) PRIMARY KEY,
+	group_no int,
+	user_id varchar(40),
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+create table csmc_209_fp.dbo.diary (
+	diary_id int IDENTITY(1,1) PRIMARY KEY,
+	user_id varchar(40),
+	blood_pressure varchar(20),
+	group_view int,
+	group_edit int,
+	group_delete int,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+	ON DELETE CASCADE ON UPDATE CASCADE
+)
+
