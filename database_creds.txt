@@ -1,0 +1,4 @@
+Host: csmc209project.cnzbn9b5jtee.us-east-1.rds.amazonaws.com
+Username: admin
+Password: passkeys
+Port: 1433
